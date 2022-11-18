@@ -15,7 +15,7 @@ impl Agent {
         if !(0.0 <= self.pos[0] && self.pos[0] <= (size.0 as f64))
             || !(0.0 <= self.pos[1] && self.pos[1] <= (size.1 as f64))
         {
-            self.angle = rand::thread_rng().gen_range(0..180) as f64;
+            self.angle = rand::thread_rng().gen_range(0..360) as f64;
         }
 
         self.past.push(self.pos.clone());
