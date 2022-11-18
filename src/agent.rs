@@ -1,3 +1,5 @@
+use std::iter::zip;
+
 use rand::{self, Rng};
 use raylib::prelude::*;
 
@@ -40,18 +42,18 @@ impl Screen {
                 Color::WHITE,
             );
 
-            while &agent.past.len() > &30 {
+            while &agent.past.len() > &50 {
                 agent.past.remove(0);
             }
 
-            for point in &agent.past {
+            for (point, num) in zip(&agent.past, 0..agent.past.len()) {
                 drawhandle.draw_circle_v(
                     Vector2 {
                         x: point[0] as f32,
                         y: point[1] as f32,
                     },
                     2.0,
-                    Color::new(255, 255, 255, 255),
+                    Color::new(255, 255, 255, ((200 as usize/agent.past.len())*num).try_into().unwrap()),
                 )
             }
         }

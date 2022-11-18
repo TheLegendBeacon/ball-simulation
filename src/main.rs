@@ -12,7 +12,7 @@ fn main() {
                 angle: 50.0,
                 past: Vec::new()
             };
-            50
+            100
         ],
         size: (640, 480),
     };
