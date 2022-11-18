@@ -15,7 +15,7 @@ fn main() {
         }
     };
 
-    let (mut rl, thread) = raylib::init().size(640, 480).title("Hello, World").build();
+    let (mut rl, thread) = raylib::init().size(640, 480).title("Ball Pit").build();
     let mut screen = Screen {
         agents: vec![
             Agent {
