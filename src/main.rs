@@ -1,8 +1,12 @@
 use std::env;
 use raylib::prelude::*;
+use rand::Rng;
 mod agent;
 
 use agent::*;
+
+const HEIGHT: u16 = 480;
+const WIDTH: u16 = 640;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -14,18 +18,18 @@ fn main() {
             return;
         }
     };
-
-    let (mut rl, thread) = raylib::init().size(640, 480).title("Ball Pit").build();
+    let mut ball_vec = Vec::new();
+    for _ in 0..balls {
+        ball_vec.push(Agent {
+            pos: [(WIDTH/2) as f64, (HEIGHT/2) as f64],
+            angle: rand::thread_rng().gen_range(0..360) as f64,
+            past: Vec::new()
+        })
+    }
+    let (mut rl, thread) = raylib::init().size(WIDTH.into(), HEIGHT.into()).title("Ball Pit").build();
     let mut screen = Screen {
-        agents: vec![
-            Agent {
-                pos: [320.0, 240.0],
-                angle: 50.0,
-                past: Vec::new()
-            };
-            balls
-        ],
-        size: (640, 480),
+        agents: ball_vec,
+        size: (WIDTH, HEIGHT),
     };
 
     rl.set_target_fps(30);
